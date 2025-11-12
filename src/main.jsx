@@ -15,6 +15,7 @@ import UpdateCar from './components/updateCar/UpdateCar.jsx';
 import AllCars from './components/allCars/AllCars.jsx';
 import CarDetails from './components/carDetails/CarDetails.jsx';
 import MyBookings from './components/myBookings/MyBookings.jsx';
+import Register from './register/Register.jsx';
 
 
 const router = createBrowserRouter([
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         Component: Login,
+      },
+      {
+        path: "register",
+        Component: Register,
       },
     ],
   },
