@@ -43,26 +43,21 @@ const MyBookings = () => {
             />
             <h3 className="text-xl font-semibold">{booking.carName}</h3>
             <p>
-              <strong>Provider:</strong> {booking.providerName}
+              <strong>Provider:</strong> {booking.provider_name}
+            </p>
+            <p>
+              <strong>Client:</strong> {booking.userName}
             </p>
             <p>
               <strong>Rent Price:</strong> ${booking.rentPrice}/day
             </p>
             <p>
               <strong>Status:</strong>{" "}
-              <span
-                className={
-                  booking.status === "Booked"
-                    ? "text-red-600"
-                    : "text-green-600"
-                }
-              >
-                {booking.status}
-              </span>
+              <span className="text-red-600">Booked</span>
             </p>
             <p>
               <strong>Booked At:</strong>{" "}
-              {new Date(booking.bookedAt).toLocaleString()}
+              {new Date(booking.bookingDate).toLocaleString()}
             </p>
           </div>
         ))}

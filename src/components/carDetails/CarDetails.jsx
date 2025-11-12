@@ -2,6 +2,7 @@ import { useLoaderData, useNavigate } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const CarDetails = () => {
   const car = useLoaderData()
@@ -9,6 +10,7 @@ const CarDetails = () => {
   const { user } = useAuth();
   const axiosInstance = useAxiosSecure();
   const navigate = useNavigate();
+  const [isBooked, setIsBooked] = useState(false)
 
   const handleBooking = async () => {
     if (!user) {
@@ -16,26 +18,34 @@ const CarDetails = () => {
       navigate("/login");
       return;
     }
+    
+    
 
     const bookingData = {
       carId: car._id,
       carName: car.carName,
       rentPrice: car.rentPrice,
+      provider_email: car.provider_email,
+      provider_name: car.provider_name,
       userEmail: user.email,
       userName: user.displayName,
       bookingDate: new Date(),
+      status: "Booked",
     };
 
     try {
       const res = await axiosInstance.post("/bookings", bookingData);
       if (res.data.success) {
         Swal.fire("Booking successful!", "Car has been booked.", "success");
+        setIsBooked(true);
       } else {
         Swal.fire("Booking failed!", "", "error");
+        setIsBooked(false);
       }
     } catch (err) {
       console.error(err);
       Swal.fire("Something went wrong!", "", "error");
+      setIsBooked(false);
     }
   };
 
@@ -52,9 +62,9 @@ const CarDetails = () => {
           <button
             onClick={handleBooking}
             className="btn btn-primary"
-            disabled={car.carStatus === "Booked"}
+            disabled={car.carStatus === "Booked" || isBooked}
           >
-            {car.carStatus === "Booked" ? "Booked" : "Book Now"}
+            {car.carStatus === "Booked" || isBooked ? "Booked" : "Book Now"}
           </button>
         </div>
       </div>
