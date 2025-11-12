@@ -69,6 +69,18 @@ const AddCar = () => {
           />
         </div>
 
+        {/* Car Model Year*/}
+        <div className="form-control">
+          <label className="label font-semibold">Model Year</label>
+          <input
+            type="text"
+            name="modelYear"
+            className="input input-bordered w-full"
+            placeholder="Enter car model year"
+            required
+          />
+        </div>
+
         {/* Description */}
         <div className="form-control">
           <label className="label font-semibold">Description</label>

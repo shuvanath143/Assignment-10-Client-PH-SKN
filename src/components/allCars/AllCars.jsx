@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import useAxios from "../../hooks/useAxios";
 import { Link } from "react-router";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 const AllCars = () => {
   const axiosInstance = useAxios();
@@ -16,7 +18,12 @@ const AllCars = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
       {cars.map((car) => (
-        <div key={car._id} className="card shadow-xl">
+        <div
+          key={car._id}
+          className="card shadow-xl cursor-pointer"
+          data-tooltip-id={`tooltip-${car._id}`}
+          data-tooltip-content={`Rent: $${car.rentPrice}/day`}
+        >
           <figure>
             <img src={car.image} alt={car.carName} />
           </figure>
@@ -35,6 +42,19 @@ const AllCars = () => {
               </Link>
             </div>
           </div>
+
+          {/* Tooltip component */}
+          <Tooltip
+            id={`tooltip-${car._id}`}
+            place="top"
+            style={{
+              backgroundColor: "#2563eb",
+              color: "white",
+              borderRadius: "6px",
+              fontSize: "14px",
+              padding: "6px 10px",
+            }}
+          />
         </div>
       ))}
     </div>

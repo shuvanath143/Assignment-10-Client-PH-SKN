@@ -14,6 +14,7 @@ import {
 } from "react-icons/fa";
 
 const ServiceSections = () => {
+  
   const topRatedCars = [
     {
       name: "Tesla Model 3",
@@ -286,6 +287,6 @@ const ServiceSections = () => {
       </section>
     </div>
   );
-}
+};
 
 export default ServiceSections;

@@ -6,12 +6,12 @@ import ServiceSections from '../serviceSections/ServiceSections';
 
 const Home = () => {
     return (
-        <div>
-            <Slider></Slider>
-            <LatestCars></LatestCars>
-            <WhyRentWithUs></WhyRentWithUs>
-            <ServiceSections></ServiceSections>
-        </div>
+      <div>
+        <Slider></Slider>
+        <LatestCars></LatestCars>
+        <WhyRentWithUs></WhyRentWithUs>
+        <ServiceSections></ServiceSections>
+      </div>
     );
 };
 
