@@ -1,9 +1,11 @@
-import { useNavigate } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 
-const CarDetails = ({ car }) => {
+const CarDetails = () => {
+  const car = useLoaderData()
+  console.log(car)
   const { user } = useAuth();
   const axiosInstance = useAxiosSecure();
   const navigate = useNavigate();

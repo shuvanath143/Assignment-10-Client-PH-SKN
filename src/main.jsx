@@ -31,12 +31,14 @@ const router = createBrowserRouter([
         Component: AllCars,
       },
       {
-        path: "/carDetails/:id",
+        path: "/cars/:id",
         element: (
           <PrivateRoute>
             <CarDetails></CarDetails>
           </PrivateRoute>
         ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/cars/${params.id}`),
       },
       {
         path: "addCar",
@@ -61,7 +63,7 @@ const router = createBrowserRouter([
           fetch(`http://localhost:3000/cars/${params.id}`),
       },
       {
-        path: "/myBookings",
+        path: "myBookings",
         element: (
           <PrivateRoute>
             <MyBookings></MyBookings>

@@ -28,7 +28,7 @@ const AllCars = () => {
             </p>
             <div className="card-actions justify-end">
               <Link
-                to={`/carDetails/${car._id}`}
+                to={`/cars/${car._id}`}
                 className="btn btn-outline btn-primary"
               >
                 View Details

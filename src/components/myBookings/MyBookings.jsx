@@ -12,9 +12,10 @@ const MyBookings = () => {
     if (!user?.email) return;
 
     axiosInstance
-      .get(`/bookings/${user.email}`)
+      .get(`/myBookings?email=${user.email}`)
       .then((res) => {
-        setBookings(res.data);
+        setBookings(res.data || []);
+        console.log("Response:", res.data);
         setLoading(false);
       })
       .catch((err) => {
