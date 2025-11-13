@@ -41,7 +41,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/cars/${params.id}`),
+          fetch(`https://car-rent-platform-api.vercel.app/cars/${params.id}`),
       },
       {
         path: "addCar",
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/cars/${params.id}`),
+          fetch(`https://car-rent-platform-api.vercel.app/cars/${params.id}`),
       },
       {
         path: "myBookings",
