@@ -37,7 +37,7 @@ const MyBookings = () => {
             className="bg-white p-4 rounded-lg shadow-md flex flex-col"
           >
             <img
-              src={booking.carImage}
+              src={booking.image}
               alt={booking.carName}
               className="h-48 w-full object-cover rounded-md mb-4"
             />

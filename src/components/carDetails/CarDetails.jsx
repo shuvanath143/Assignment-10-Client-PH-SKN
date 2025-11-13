@@ -22,6 +22,7 @@ const CarDetails = () => {
       carId: car._id,
       carName: car.carName,
       rentPrice: car.rentPrice,
+      image: car.image,
       location: car.location,
       provider_email: car.provider_email,
       provider_name: car.provider_name,
@@ -47,7 +48,7 @@ const CarDetails = () => {
   };
 
   return (
-    <div className="flex justify-center mt-10">
+    <div className="flex justify-center pt-10">
       <div className="card w-full md:w-2/3 lg:w-1/2 bg-base-100 shadow-2xl">
         <figure className="p-4">
           <img

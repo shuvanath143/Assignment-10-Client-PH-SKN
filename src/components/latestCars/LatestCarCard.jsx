@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { FaCarBattery, FaRegCalendarAlt } from "react-icons/fa";
 
 const LatestCarCard = ({ latestCar }) => {
     const { carName, carStatus, category, image, provider_name, rentPrice, modelYear } = latestCar;
@@ -28,39 +29,12 @@ const LatestCarCard = ({ latestCar }) => {
             <div className="flex items-center gap-6 mt-4 text-gray-500">
               <div className="flex items-center gap-2 text-sm">
                 {/* automatic icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 opacity-80"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 7h18M3 12h18M3 17h18"
-                  />
-                </svg>
+                <FaRegCalendarAlt />
                 <span>{modelYear}</span>
               </div>
 
               <div className="flex items-center gap-2 text-sm">
-                {/* hybrid icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 opacity-80"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 2v20M2 12h20"
-                  />
-                </svg>
+                <FaCarBattery />
                 <span>Hybrid</span>
               </div>
             </div>
