@@ -40,9 +40,21 @@ const Register = () => {
       });
   };
   return (
-    <div className="flex justify-center min-h-screen items-center">
+    <div className="relative min-h-screen overflow-hidden flex justify-center items-center">
+      {/* Background Image */}
+      <div
+        className="fixed inset-0 -z-10 bg-cover bg-center opacity-80 animate-opacityChange"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1503376780353-7e6692767b70')",
+        }}
+      ></div>
+
+      {/* Overlay for dark effect */}
+      <div className="fixed inset-0 bg-black/40 -z-10"></div>
+      
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5">
-        <h2 className="font-semibold text-2xl text-center">
+        <h2 className="text-3xl font-bold text-center">
           Register your account
         </h2>
         <form onSubmit={handleRegister} className="card-body">
@@ -103,12 +115,15 @@ const Register = () => {
                 {isEyeOpen ? <LuEyeClosed /> : <FaEye />}
               </div>
             </div>
-            <button type="submit" className="btn btn-neutral mt-4">
+            <button
+              type="submit"
+              className="btn text-white mt-4 w-full btn-primary"
+            >
               Register
             </button>
             <p className="font-semibold text-center pt-5">
               Already Have An Account ?{" "}
-              <Link className="text-secondary" to="/auth/login">
+              <Link className="text-secondary" to="../login">
                 Login
               </Link>
             </p>

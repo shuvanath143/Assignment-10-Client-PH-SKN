@@ -14,3 +14,14 @@
 .btn-primary:hover {
   @apply opacity-90;
 }
+
+/* 👇 Add your custom wiggle animation here */
+@keyframes fade {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* This creates a utility you can use in className */
+.animate-fade {
+  animation: fade 8s ease-in-out infinite;
+}

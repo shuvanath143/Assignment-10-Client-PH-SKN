@@ -6,7 +6,7 @@ import ServiceSections from '../serviceSections/ServiceSections';
 
 const Home = () => {
     return (
-      <div>
+      <div className='pt-5'>
         <Slider></Slider>
         <LatestCars></LatestCars>
         <WhyRentWithUs></WhyRentWithUs>

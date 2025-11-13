@@ -43,7 +43,11 @@ const router = createBrowserRouter([
       },
       {
         path: "addCar",
-        Component: AddCar,
+        element: (
+          <PrivateRoute>
+            <AddCar></AddCar>
+          </PrivateRoute>
+        ),
       },
       {
         path: "myCars",
