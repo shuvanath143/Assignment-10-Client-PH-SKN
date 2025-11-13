@@ -48,7 +48,7 @@ const axiosInstance = useAxiosSecure();
           </span>
         )}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
       {filteredCars.length ? (filteredCars.map((car) => (
         <div
           key={car._id}
@@ -57,7 +57,7 @@ const axiosInstance = useAxiosSecure();
           data-tooltip-content={`Rent: $${car.rentPrice}/day`}
         >
           <figure>
-            <img src={car.image} alt={car.carName} />
+            <img src={car.image} alt={car.carName} className="object-fit h-50 w-full"/>
           </figure>
           <div className="card-body">
             <h2 className="card-title">{car.carName}</h2>

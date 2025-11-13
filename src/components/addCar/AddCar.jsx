@@ -51,7 +51,7 @@ const AddCar = () => {
   };
 
   return (
-    <section className="max-w-3xl mx-auto my-12 p-8 bg-base-200 rounded-2xl shadow-xl">
+    <section className="max-w-3xl my-10 mx-auto p-8 bg-base-200 rounded-2xl shadow-xl">
       <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
         Add a New Car
       </h2>

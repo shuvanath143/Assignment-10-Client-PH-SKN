@@ -48,7 +48,7 @@ const CarDetails = () => {
   };
 
   return (
-    <div className="flex justify-center pt-10">
+    <div className="flex justify-center py-10">
       <div className="card w-full md:w-2/3 lg:w-1/2 bg-base-100 shadow-2xl">
         <figure className="p-4">
           <img

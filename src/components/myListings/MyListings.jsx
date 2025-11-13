@@ -49,9 +49,9 @@ const MyListings = () => {
   };
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto pt-20 mx-auto">
       <table className="table w-full">
-        <thead>
+        <thead className="text-center">
           <tr>
             <th>Car Name</th>
             <th>Category</th>
@@ -60,7 +60,7 @@ const MyListings = () => {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-center">
           {Array.isArray(cars) &&
             cars.map((car) => (
               <tr key={car._id}>
@@ -68,7 +68,7 @@ const MyListings = () => {
                 <td>{car.category}</td>
                 <td>${car.rentPrice}</td>
                 <td>{car.carStatus}</td>
-                <td className="flex gap-2">
+                <td className="flex justify-center items-center gap-2">
                   <button
                     onClick={() => navigate(`/updateCar/${car._id}`)}
                     className="btn btn-xs btn-info"
