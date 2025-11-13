@@ -21,28 +21,28 @@ const ServiceSections = () => {
       rating: 5,
       price: "$120/day",
       type: "Electric Sedan",
-      img: "https://images.unsplash.com/photo-1616788494725-1fda6c7e4f74?auto=format&fit=crop&w=800&q=80",
+      img: "https://i.ibb.co.com/ZpyQkxjV/Tesla-Model-3.jpg",
     },
     {
       name: "BMW X5",
       rating: 5,
       price: "$150/day",
       type: "Luxury SUV",
-      img: "https://images.unsplash.com/photo-1617817546004-8f009b0a23b4?auto=format&fit=crop&w=800&q=80",
+      img: "https://i.ibb.co.com/DDgZmL14/BMW-320i-2019.jpg",
     },
     {
       name: "Toyota RAV4",
       rating: 4,
       price: "$80/day",
       type: "Hybrid SUV",
-      img: "https://images.unsplash.com/photo-1600803905860-7e9b9b9b7d8a?auto=format&fit=crop&w=800&q=80",
+      img: "https://i.ibb.co.com/ZzG8rDbs/Toyota-Yaris-2019.jpg",
     },
     {
       name: "Mercedes C-Class",
       rating: 5,
       price: "$140/day",
       type: "Luxury Sedan",
-      img: "https://images.unsplash.com/photo-1601933470098-5c6b2f5b04cf?auto=format&fit=crop&w=800&q=80",
+      img: "https://i.ibb.co.com/CKBhNC4R/Mercedes-Benz-E-Class-2020.jpg",
     },
   ];
 

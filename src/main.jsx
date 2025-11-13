@@ -16,12 +16,14 @@ import AllCars from './components/allCars/AllCars.jsx';
 import CarDetails from './components/carDetails/CarDetails.jsx';
 import MyBookings from './components/myBookings/MyBookings.jsx';
 import Register from './register/Register.jsx';
+import ErrorPage from './components/errorPage/ErrorPage.jsx';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
