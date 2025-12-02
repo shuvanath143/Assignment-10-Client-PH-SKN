@@ -1,9 +1,9 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import slide1Img from "../../assets/slide1.jpg";
-import slide2Img from "../../assets/slide2.avif";
-import slide3Img from "../../assets/slide3.avif";
+import slide1Img from "../../assets/2020-Ford-Mustang.webp";
+import slide2Img from "../../assets/Tesla Model 3.jpg";
+import slide3Img from "../../assets/campbell-3ZUsNJhi_Ik-unsplash.jpg";
 // import slide4Img from "../assets/slide4.avif"
 
 // Import Swiper styles
@@ -15,23 +15,17 @@ const slides = [
   {
     id: 1,
     image: slide1Img,
-    title: "Cozy Winter Jackets",
-    description: "Keep your pets warm and stylish this winter.",
-    button: "Shop Now",
+    title: "Ford Mustang",
   },
   {
     id: 2,
     image: slide2Img,
-    title: "Paw-Friendly Booties",
-    description: "Protect their paws from snow and ice.",
-    button: "Explore Collection",
+    title: "Tesla 3",
   },
   {
     id: 3,
     image: slide3Img,
-    title: "Festive Pet Scarves",
-    description: "Add a touch of holiday charm to your furry friends.",
-    button: "View Scarves",
+    title: "Campbell",
   },
 ];
 

@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3000',
-  
+  // baseURL: 'http://localhost:3000',
+  baseURL: 'https://car-rent-platform-api.vercel.app',
 });
 
 const useAxiosSecure = () => {
