@@ -17,7 +17,12 @@ import CarDetails from './components/carDetails/CarDetails.jsx';
 import MyBookings from './components/myBookings/MyBookings.jsx';
 import Register from './register/Register.jsx';
 import ErrorPage from './components/errorPage/ErrorPage.jsx';
+import DashboardLayout from './layouts/DashboardLayout.jsx';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Profile from './components/profile/Profile.jsx';
 
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -34,48 +39,8 @@ const router = createBrowserRouter([
         Component: AllCars,
       },
       {
-        path: "/cars/:id",
-        element: (
-          <PrivateRoute>
-            <CarDetails></CarDetails>
-          </PrivateRoute>
-        ),
-        loader: ({ params }) =>
-          fetch(`https://car-rent-platform-api.vercel.app/cars/${params.id}`),
-      },
-      {
         path: "addCar",
-        element: (
-          <PrivateRoute>
-            <AddCar></AddCar>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "myCars",
-        element: (
-          <PrivateRoute>
-            <MyListings></MyListings>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "updateCar/:id",
-        element: (
-          <PrivateRoute>
-            <UpdateCar></UpdateCar>
-          </PrivateRoute>
-        ),
-        loader: ({ params }) =>
-          fetch(`https://car-rent-platform-api.vercel.app/cars/${params.id}`),
-      },
-      {
-        path: "myBookings",
-        element: (
-          <PrivateRoute>
-            <MyBookings></MyBookings>
-          </PrivateRoute>
-        ),
+        Component: AddCar,
       },
       {
         path: "login",
@@ -87,12 +52,50 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "cars/:id",
+        Component: CarDetails,
+        loader: ({ params }) =>
+          // fetch(`https://car-rent-platform-api.vercel.app/cars/${params.id}`),
+          fetch(`http://localhost:3000/cars/${params.id}`)
+      },
+      {
+        path: "myCars",
+        Component: MyListings,
+      },
+      {
+        path: "updateCar/:id",
+        Component: UpdateCar,
+        loader: ({ params }) =>
+          // fetch(`https://car-rent-platform-api.vercel.app/cars/${params.id}`),
+        fetch(`http://localhost:3000/cars/${params.id}`)
+      },
+      {
+        path: "myBookings",
+        Component: MyBookings,
+      },
+      {
+        path: "profile",
+        Component: Profile,
+      },
+    ],
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router}></RouterProvider>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>
 );

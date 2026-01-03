@@ -3,16 +3,22 @@ import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { LuEyeClosed } from "react-icons/lu";
 import { FaEye } from "react-icons/fa";
+import useAxios from "../hooks/useAxios";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Register = () => {
-  const { createUser, setUser } = use(AuthContext);
+  const { createUser, updateUserProfile } = use(AuthContext);
   const [nameError, setNameError] = useState("");
   const [isEyeOpen, setIsEyeOpen] = useState(false);
   const navigate = useNavigate();
+  const axiosInstance = useAxios()
+  const axiosSecure = useAxiosSecure()
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     // console.log(e.target);
+    
     const form = e.target;
     const name = form.name.value;
     if (name.length < 5) {
@@ -22,23 +28,66 @@ const Register = () => {
     } else {
       setNameError("");
     }
-    const photo = form.photo.value;
+    // const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
+    const profileImage = form.photo.files[0]
     // console.log({ name, photo, email, password });
+    const res = await axiosInstance.get(`/checkUsers/${email}`)
+    console.log(res)
+    if (res.data) {
+      Swal.fire("You are already registered. Please login!");
+      navigate('/login')
+      return
+    } 
+    
     createUser(email, password)
       .then((result) => {
-        const user = result.user;
-        // console.log(user);
-        setUser(user);
-        // showToast("Registered Successfully");
-        navigate(`${location.state ? location.state : "/"}`);
+        console.log(result.user);
+
+        // 1. store the image in form data
+        const formData = new FormData();
+        formData.append("image", profileImage);
+
+        // 2. send the photo to store and get url
+        const image_API_URL = `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_image_host
+        }`;
+        axiosInstance
+          .post(image_API_URL, formData)
+          .then((res) => {
+            // console.log("After Image Upload", res, res.data.data.url);
+
+            // Create user profile in database
+            const photoURL = res.data.data.url;
+            const userInfo = {
+              email: email,
+              displayName: name,
+              photoURL: photoURL,
+            };
+            axiosSecure.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                console.log("user created in db");
+              }
+            });
+
+            // 3. update user profile
+            const userProfile = {
+              displayName: name,
+              photoURL: photoURL,
+            };
+            updateUserProfile(userProfile)
+              .then(() => {
+                // console.log('User Profile Updated')
+                navigate(location?.state || "/");
+              })
+              .catch((e) => console.log(e));
+          })
+          .catch((e) => console.log(e.message));
       })
-      .catch((error) => {
-        console.log(error)
-        // showErrorToast(error.code, ": Registration Failed. Try Again");
-      });
+      .catch((err) => console.log(err));
   };
+
   return (
     <div className="relative min-h-screen overflow-hidden flex justify-center items-center">
       {/* Background Image */}
@@ -78,9 +127,10 @@ const Register = () => {
               <label className="label">Photo URl </label>
               <input
                 name="photo"
-                type="text"
+                type="file"
+                accept="image/*"
                 className="input peer w-full border-b-2 focus:outline-none bg-transparent"
-                placeholder="Photo URl"
+                placeholder="Photo URL"
                 required
               />
               <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-black transition-all duration-800 peer-hover:w-full"></span>

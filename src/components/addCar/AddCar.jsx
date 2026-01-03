@@ -2,15 +2,42 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext"; // your Auth context
 import { toast } from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxios from "../../hooks/useAxios";
 import Swal from "sweetalert2";
+
+const image_API_URL = `https://api.imgbb.com/1/upload?key=${
+  import.meta.env.VITE_image_host
+}`;
 
 const AddCar = () => {
   const { user } = useContext(AuthContext);
   const axiosInstance = useAxiosSecure();
+  const axios = useAxios()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
+
+    const imageFile = form.image.files[0];
+    if (!imageFile) {
+      toast.error("Please select an image");
+      return;
+    }
+
+    let imageURL = "";
+
+    try {
+      // Upload image to ImgBB
+      const formData = new FormData();
+      formData.append("image", imageFile);
+
+      const imgRes = await axios.post(image_API_URL, formData);
+      imageURL = imgRes.data.data.url;
+    } catch (error) {
+      console.error(error);
+      toast.error("Image upload failed");
+      return;
+    }
 
     const newCar = {
       carName: form.carName.value,
@@ -18,37 +45,31 @@ const AddCar = () => {
       category: form.category.value,
       rentPrice: parseFloat(form.rentPrice.value),
       location: form.location.value,
-      image: form.image.value,
+      image: imageURL,
       provider_name: user?.displayName,
       provider_email: user?.email,
       carStatus: "Available",
-      modelYear: new Date().getFullYear(),
+      modelYear: form.modelYear.value,
     };
 
-    // axiosInstance.post("/addCar", newCar)
-    // .then(data => {
-    //   console.log(data.data)
-    // })
     try {
       const res = await axiosInstance.post("/addCar", newCar);
+
       if (res.data.insertedId) {
-        console.log(res.data.insertedId);
         Swal.fire({
-          position: "center",
           icon: "success",
-          title: "Your work has been saved",
-          showConfirmButton: false,
+          title: "Car added successfully",
           timer: 1500,
+          showConfirmButton: false,
         });
         form.reset();
-      } else {
-        toast.error("Failed to add car!");
       }
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong!");
+      toast.error("Failed to add car");
     }
   };
+
 
   return (
     <section className="max-w-3xl my-10 mx-auto p-8 bg-base-200 rounded-2xl shadow-xl">
@@ -135,10 +156,11 @@ const AddCar = () => {
 
         {/* Image URL */}
         <div className="form-control">
-          <label className="label font-semibold">Car Image URL</label>
+          <label className="label font-semibold">Car Image</label>
           <input
-            type="text"
+            type="file"
             name="image"
+            accept="image/*"
             className="input input-bordered w-full"
             placeholder="Please Insert Car Image URL"
             required

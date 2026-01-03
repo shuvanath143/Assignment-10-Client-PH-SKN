@@ -70,7 +70,7 @@ const MyListings = () => {
                 <td>{car.carStatus}</td>
                 <td className="flex justify-center items-center gap-2">
                   <button
-                    onClick={() => navigate(`/updateCar/${car._id}`)}
+                    onClick={() => navigate(`/dashboard/updateCar/${car._id}`)}
                     className="btn btn-xs btn-info"
                   >
                     Update

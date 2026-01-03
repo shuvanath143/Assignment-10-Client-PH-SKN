@@ -36,10 +36,13 @@ const Navbar = () => {
         {user && (
           <>
             <li>
-              <NavLink to="/myCars">My Cars</NavLink>
+              <NavLink to="/dashboard/myCars">My Cars</NavLink>
             </li>
             <li>
-              <NavLink to="/myBookings">My Bookings</NavLink>
+              <NavLink to="/dashboard/myBookings">My Bookings</NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/profile">Profile</NavLink>
             </li>
           </>
         )}
@@ -74,10 +77,10 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">
+          <Link to='/' className="btn btn-ghost text-xl">
             RentalWheels{" "}
-            <span className="text-primary">A Car Rent Platform</span>
-          </a>
+            {/* <span className="text-primary">A Car Rent Platform</span> */}
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>

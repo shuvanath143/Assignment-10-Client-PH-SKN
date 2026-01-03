@@ -1,5 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const UpdateCar = () => {
   const car = useLoaderData();
@@ -20,8 +22,9 @@ const UpdateCar = () => {
 
     const res = await axiosSecure.put(`/cars/${car._id}`, updatedCar);
     if (res.data.modifiedCount) {
-      alert("Car updated successfully!");
-      navigate("/myCars");
+      // alert("Car updated successfully!");
+      Swal.fire("Updated!", "Car updated successfully!", "success");
+      navigate("/dashboard/myCars");
     }
   };
 
